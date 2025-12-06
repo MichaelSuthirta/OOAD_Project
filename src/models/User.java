@@ -1,10 +1,10 @@
 package models;
 
 public abstract class User {
-	private String idUser, fullName, email, password, phone, address, role;
+	private String idUser, fullName, email, password, phone, address, gender, role;
 
 	public User(String idUser, String fullName, String email, String password, String phone, String address,
-			String role) {
+			String gender, String role) {
 		super();
 		this.idUser = idUser;
 		this.fullName = fullName;
@@ -12,6 +12,7 @@ public abstract class User {
 		this.password = password;
 		this.phone = phone;
 		this.address = address;
+		this.gender = gender;
 		this.role = role;
 	}
 
