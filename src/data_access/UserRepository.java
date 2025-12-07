@@ -17,7 +17,7 @@ public class UserRepository {
 			st.setInt(1, id);
 			ResultSet result = st.executeQuery();
 			return new User(
-					Integer.toString(result.getInt("id")),
+					Integer.toString(result.getInt("idUser")),
 					result.getString("fullName"),
 					result.getString("email"),
 					result.getString("password"),
