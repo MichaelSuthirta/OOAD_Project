@@ -48,31 +48,32 @@ public class UserRepository {
 		return null;
 	}
 	
-	public static Customer insertUser(User user) {
+	public static Customer insertUser(String username, String email, String password, String phone,
+			String address, String gender) {
 		String query = "INSERT INTO users(fullName, email, password, phone, address, gender, role, balance) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, 0)";
 		
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
-			st.setString(1, user.getFullName());
-			st.setString(2, user.getEmail());
-			st.setString(3, user.getPassword());
-			st.setString(4, user.getPhone());
-			st.setString(5, user.getAddress());
-			st.setString(6, user.getGender());
+			st.setString(1, username);
+			st.setString(2, email);
+			st.setString(3, password);
+			st.setString(4, phone);
+			st.setString(5, address);
+			st.setString(6, gender);
 			st.setString(7, "customer");
 			
 			int res = st.executeUpdate();
 			
 			if(res == 1) {
 				return new Customer(
-						findIDByEmail(user.getEmail()),
-						user.getFullName(),
-						user.getEmail(),
-						user.getPassword(),
-						user.getPhone(),
-						user.getAddress(),
-						user.getGender(),
+						findIDByEmail(email),
+						username,
+						email,
+						password,
+						phone,
+						address,
+						gender,
 						0
 						);
 			}
