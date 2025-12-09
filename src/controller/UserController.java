@@ -47,4 +47,18 @@ public class UserController {
 		return customer;
 	}
 	
+	public static User loginUser(String email, String password) {
+		int id = UserRepository.findIDByEmail(email);
+		
+		if(id == -1) {
+			return null;
+		}
+		
+		User user = UserRepository.findUserByID(id);
+		
+		if(user != null && user.getPassword().equals(password)) {
+			return user;
+		}
+		else return null;
+	}
 }
