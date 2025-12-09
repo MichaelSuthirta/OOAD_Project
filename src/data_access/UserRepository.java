@@ -11,18 +11,18 @@ import models.User;
 public class UserRepository {
 	static Connection conn = DatabaseConnector.getConnection();
 	
-	private static String findIDByEmail(String email) {
+	public static int findIDByEmail(String email) {
 		String query = "SELECT * FROM users WHERE 'email'=?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setString(1, email);
 			ResultSet result = st.executeQuery();
-			return Integer.toString(result.getInt("id"));
+			return result.getInt("id");
 		} catch (SQLException e) {
 			System.out.println("Failed to prepare query");
 			e.printStackTrace();
 		}
-		return "-1";
+		return -1;
 	}
 	
 	public static User findUserByID(int id) {
@@ -67,7 +67,7 @@ public class UserRepository {
 			
 			if(res == 1) {
 				return new Customer(
-						findIDByEmail(email),
+						Integer.toString(findIDByEmail(email)),
 						username,
 						email,
 						password,
