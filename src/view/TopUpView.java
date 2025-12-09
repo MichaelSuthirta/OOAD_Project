@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,8 +12,7 @@ public class TopUpView {
 
     Stage stage;
     TextField amountField;
-    Button topUpButton;
-    Button backButton;
+    Button topUpButton, backButton;
     GridPane gp;
     Scene scene;
 

@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -15,9 +15,10 @@ public class ProductListView {
 
     Stage stage;
     TableView<Product> productTable;
-    Button addToCartButton;
-    Button backButton;
+    Button addToCartButton, backButton;
     BorderPane bp;
+    HBox hbox;
+    Label title;
 
     public ProductListView(Stage stage) {
         this.stage = stage;
@@ -27,7 +28,7 @@ public class ProductListView {
         bp= new BorderPane();
         bp.setPadding(new Insets(15));
 
-        Label title = new Label("Product List");
+        title = new Label("Product List");
 
       
         productTable = new TableView<>();
@@ -44,7 +45,7 @@ public class ProductListView {
         addToCartButton = new Button("Add to Cart");
         backButton = new Button("Back");
 
-        HBox hbox = new HBox(10, addToCartButton, backButton);
+        hbox = new HBox(10, addToCartButton, backButton);
 
         bp.setTop(title);
         bp.setCenter(productTable);

@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,8 +13,7 @@ public class AddToCartView {
     Stage stage;
     Label productNameLabel;
     TextField countField;
-    Button addButton;
-    Button backButton;
+    Button addButton, backButton;
     GridPane gp;
     Scene scene;
 

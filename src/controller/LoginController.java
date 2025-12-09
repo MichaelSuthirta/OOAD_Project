@@ -1,7 +1,7 @@
 package controller;
 
-import View.LoginView;
 import javafx.stage.Stage;
+import view.LoginView;
 
 public class LoginController {
 
