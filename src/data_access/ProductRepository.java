@@ -34,7 +34,7 @@ public class ProductRepository {
 		
 	}
 	
-	public static boolean updateStock(int ID, int newStock) {
+	public static Product updateStock(int ID, int newStock) {
 		String query = "UPDATE products SET stock = ? WHERE idProduct = ?";
 		
 		try {
@@ -42,11 +42,11 @@ public class ProductRepository {
 			ps.setInt(1, newStock);
 			ps.setInt(2, ID);
 			int res = ps.executeUpdate();
-			return res == 0;
+			return findProductByID(ID);
 		} catch (SQLException e) {
 			System.out.println("Failure in connection to database.");
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 		
 	}
