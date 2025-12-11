@@ -61,4 +61,32 @@ public class UserController {
 		}
 		else return null;
 	}
+	
+	public static Customer topUpBalance(String userID, String topUpAmt) {
+		double topUp;
+		int id;
+		
+		try {
+			id = Integer.parseInt(userID);
+		}
+		catch(Exception e) {
+			System.out.println("ID is wrong");
+			return null;
+		}
+		
+		try {
+			topUp = Double.parseDouble(topUpAmt);
+		}
+		catch(Exception e) {
+			System.out.println("Wrong input");
+			return null;
+		}
+		
+		if(topUp < 0) {
+			System.out.println("Please input number greater than zero");
+			return null;
+		}
+		
+		return UserRepository.topUp(id, topUp);
+	}
 }
