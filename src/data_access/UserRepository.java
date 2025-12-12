@@ -84,4 +84,36 @@ public class UserRepository {
 		}
 		return null;
 	}
+	
+	public static Customer topUp(int userID, double topUpAmt) {
+		User user = findUserByID(userID);
+		
+		if(user.getRole().toLowerCase().equals("customer")) {
+			Customer customer = (Customer) user;
+			customer.setBalance(customer.getBalance() + topUpAmt);
+			
+			String query = "UPDATE users SET balance = ? WHERE idUser = ?";
+			
+			try {
+				PreparedStatement ps = conn.prepareStatement(query);
+				ps.setInt(1, userID);
+				ps.setDouble(2, customer.getBalance());
+				int affectedRows = ps.executeUpdate();
+				
+				if(affectedRows == 0) {
+					System.out.println("Failed to top up");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+			return customer;
+		}
+		
+		else {
+			System.out.println("This user isn't a customer, cannot top up.");
+			return null;
+		}
+	}
 }
