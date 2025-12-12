@@ -3,6 +3,7 @@ package view;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ public class LoginView {
     GridPane gp;
     Scene scene;
     Label emailLabel, passLabel;
+    Hyperlink signupLink;
 
     public LoginView(Stage stage) {
         this.stage = stage;
@@ -37,6 +39,8 @@ public class LoginView {
 
         loginButton = new Button("Login");
 
+        signupLink = new Hyperlink("Don’t have an account? Sign up");
+
         gp.add(emailLabel, 0, 0);
         gp.add(emailField, 1, 0);
 
@@ -45,11 +49,19 @@ public class LoginView {
 
         gp.add(loginButton, 1, 2);
 
-        scene = new Scene(gp, 350, 200);
+        gp.add(signupLink, 1, 3); 
+
+        signupLink.setOnAction(e -> {
+            System.out.println("Sign Up clicked!");
+            new RegisterView(stage).show();
+        });
+
+        scene = new Scene(gp, 350, 220);
         stage.setScene(scene);
         stage.setTitle("Login");
         stage.show();
     }
+
     
     public String getEmail() {
         return emailField.getText();
