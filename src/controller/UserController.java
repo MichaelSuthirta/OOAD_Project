@@ -66,6 +66,7 @@ public class UserController {
 		double topUp;
 		int id;
 		
+		//Parse user ID
 		try {
 			id = Integer.parseInt(userID);
 		}
@@ -74,6 +75,7 @@ public class UserController {
 			return null;
 		}
 		
+		//Parse top up
 		try {
 			topUp = Double.parseDouble(topUpAmt);
 		}
@@ -82,8 +84,8 @@ public class UserController {
 			return null;
 		}
 		
-		if(topUp < 0) {
-			System.out.println("Please input number greater than zero");
+		if(topUp < 10000) {
+			System.out.println("Top up must be at least 10,000");
 			return null;
 		}
 		
