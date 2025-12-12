@@ -1,14 +1,14 @@
-package data_access;
+package models.data_handling;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import models.Customer;
-import models.User;
+import models.entity_models.Customer;
+import models.entity_models.User;
 
-public class UserRepository {
+public class UserModel {
 	static Connection conn = DatabaseConnector.getConnection();
 	
 	public static int findIDByEmail(String email) {
