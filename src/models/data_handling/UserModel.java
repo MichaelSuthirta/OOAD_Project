@@ -12,7 +12,7 @@ public class UserModel {
 	static Connection conn = DatabaseConnector.getConnection();
 	
 	public static int findIDByEmail(String email) {
-		String query = "SELECT * FROM users WHERE 'email'=?";
+		String query = "SELECT * FROM users WHERE 'email'= ?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setString(1, email);
@@ -115,5 +115,32 @@ public class UserModel {
 			System.out.println("This user isn't a customer, cannot top up.");
 			return null;
 		}
+	}
+	
+	public static Customer editProfile(int userID, String fullName, String phone, String address) {
+	    User user = findUserByID(userID);
+
+	    if(user == null || !user.getRole().equalsIgnoreCase("customer")) {
+	        System.out.println("This user isn't a customer.");
+	        return null;
+	    }
+
+	    String query = "UPDATE users SET fullName = ?, phone = ?, address = ? WHERE idUser = ?";
+
+	    try {
+	        PreparedStatement ps = conn.prepareStatement(query);
+	        ps.setString(1, fullName);
+	        ps.setString(2, phone);
+	        ps.setString(3, address);
+	        ps.setInt(4, userID);
+
+	        int affectedRows = ps.executeUpdate();
+	        if(affectedRows > 0) {
+	            return (Customer) findUserByID(userID);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return UserModel.editProfile(userID, fullName, phone, address);
 	}
 }

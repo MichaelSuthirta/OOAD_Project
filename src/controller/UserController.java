@@ -55,7 +55,7 @@ public class UserController {
 		}
 		
 		User user = UserModel.findUserByID(id);
-		
+			
 		if(user != null && user.getPassword().equals(password)) {
 			return user;
 		}
@@ -91,4 +91,36 @@ public class UserController {
 		
 		return UserModel.topUp(id, topUp);
 	}
+	
+	public static Customer editProfile(String userID, String fullName, String phone, String address) {
+		int id;
+
+		if (fullName.isBlank() || phone.isBlank() || address.isBlank()) {
+			System.out.println("Empty field(s)");
+			return null;
+		}
+
+		// Check phone numeric
+		try {
+			Long.parseLong(phone);
+		} catch (Exception e) {
+			System.out.println("Phone must be numeric");
+			return null;
+		}
+
+		if (phone.length() < 10 || phone.length() > 13) {
+			System.out.println("Phone length invalid");
+			return null;
+		}
+
+		try {
+			id = Integer.parseInt(userID);
+		} catch (Exception e) {
+			System.out.println("Invalid ID");
+			return null;
+		}
+
+		return UserModel.editProfile(id, fullName, phone, address);
+	}
+
 }
