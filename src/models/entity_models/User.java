@@ -1,4 +1,4 @@
-package models;
+package models.entity_models;
 
 import controller.UserController;
 

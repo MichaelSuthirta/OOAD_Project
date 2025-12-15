@@ -1,4 +1,4 @@
-package data_access;
+package models.data_handling;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

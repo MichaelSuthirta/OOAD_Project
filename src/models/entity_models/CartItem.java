@@ -1,4 +1,4 @@
-package models;
+package models.entity_models;
 
 public class CartItem {
 	private String idCustomer, idProduct;

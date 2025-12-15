@@ -1,9 +1,10 @@
 package controller;
 
-import data_access.ProductRepository;
-import models.Product;
+import models.data_handling.ProductModel;
+import models.entity_models.Product;
 
 public class ProductController {
+	
 	
 	public static Product editStock(String id, String newStock) {
 		int stock;
@@ -20,7 +21,7 @@ public class ProductController {
 			return null;
 		}
 		
-		return ProductRepository.updateStock(Integer.parseInt(id), stock);
+		return ProductModel.updateStock(Integer.parseInt(id), stock);
 	}
 
 }

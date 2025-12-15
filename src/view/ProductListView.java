@@ -9,7 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import models.Product;
+import models.entity_models.Product;
 
 public class ProductListView {
 

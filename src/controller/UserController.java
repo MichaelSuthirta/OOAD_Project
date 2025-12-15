@@ -1,13 +1,13 @@
 package controller;
 
-import data_access.UserRepository;
-import models.Customer;
-import models.User;
+import models.data_handling.UserModel;
+import models.entity_models.Customer;
+import models.entity_models.User;
 
 public class UserController {
 
 	public static User getUserByID(String ID) {
-		User result = UserRepository.findUserByID(Integer.parseInt(ID));
+		User result = UserModel.findUserByID(Integer.parseInt(ID));
 		return result;
 	}
 	
@@ -42,19 +42,19 @@ public class UserController {
 			return null;
 		}
 		
-		Customer customer = UserRepository.insertUser(username, email, password, phone, address, gender);
+		Customer customer = UserModel.insertUser(username, email, password, phone, address, gender);
 		
 		return customer;
 	}
 	
 	public static User loginUser(String email, String password) {
-		int id = UserRepository.findIDByEmail(email);
+		int id = UserModel.findIDByEmail(email);
 		
 		if(id == -1) {
 			return null;
 		}
 		
-		User user = UserRepository.findUserByID(id);
+		User user = UserModel.findUserByID(id);
 		
 		if(user != null && user.getPassword().equals(password)) {
 			return user;
@@ -89,6 +89,6 @@ public class UserController {
 			return null;
 		}
 		
-		return UserRepository.topUp(id, topUp);
+		return UserModel.topUp(id, topUp);
 	}
 }

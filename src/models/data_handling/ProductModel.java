@@ -1,13 +1,13 @@
-package data_access;
+package models.data_handling;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import models.Product;
+import models.entity_models.Product;
 
-public class ProductRepository {
+public class ProductModel {
 	private static Connection conn = DatabaseConnector.getConnection();
 	
 	public static Product findProductByID(int ID) {
@@ -41,7 +41,11 @@ public class ProductRepository {
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, newStock);
 			ps.setInt(2, ID);
+			
+			//Update the product
 			int res = ps.executeUpdate();
+			
+			//Return the product
 			return findProductByID(ID);
 		} catch (SQLException e) {
 			System.out.println("Failure in connection to database.");
