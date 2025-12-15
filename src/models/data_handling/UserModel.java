@@ -13,7 +13,7 @@ public class UserModel {
 	static Connection conn = DatabaseConnector.getConnection();
 	
 	public static int findIDByEmail(String email) {
-		String query = "SELECT * FROM users WHERE 'email'= ?";
+		String query = "SELECT * FROM users WHERE email= ?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setString(1, email);
@@ -27,7 +27,7 @@ public class UserModel {
 	}
 	
 	public static User findUserByID(int id) {
-		String query = "SELECT * FROM users WHERE 'id'= ?";
+		String query = "SELECT * FROM users WHERE id= ?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setInt(1, id);
