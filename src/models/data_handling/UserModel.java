@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import models.entity_models.Admin;
 import models.entity_models.Customer;
 import models.entity_models.User;
 
@@ -26,7 +27,7 @@ public class UserModel {
 	}
 	
 	public static User findUserByID(int id) {
-		String query = "SELECT * FROM users WHERE 'id'=?";
+		String query = "SELECT * FROM users WHERE 'id'= ?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setInt(1, id);
@@ -96,8 +97,8 @@ public class UserModel {
 			
 			try {
 				PreparedStatement ps = conn.prepareStatement(query);
-				ps.setInt(1, userID);
-				ps.setDouble(2, customer.getBalance());
+				ps.setDouble(1, customer.getBalance());
+				ps.setInt(2, userID);
 				int affectedRows = ps.executeUpdate();
 				
 				if(affectedRows == 0) {
@@ -143,4 +144,7 @@ public class UserModel {
 	    }
 	    return UserModel.editProfile(userID, fullName, phone, address);
 	}
+	
+	
+	
 }

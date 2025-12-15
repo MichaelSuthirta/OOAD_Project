@@ -1,6 +1,7 @@
 package controller;
 
 import models.data_handling.UserModel;
+import models.entity_models.Admin;
 import models.entity_models.Customer;
 import models.entity_models.User;
 
@@ -122,5 +123,6 @@ public class UserController {
 
 		return UserModel.editProfile(id, fullName, phone, address);
 	}
-
+	
+ 
 }

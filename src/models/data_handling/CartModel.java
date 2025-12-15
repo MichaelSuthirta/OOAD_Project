@@ -33,36 +33,36 @@ public class CartModel {
 		}
 		return items;
 	}
-
-	public static boolean upsertCartItem(int customerId, int productId, int count) {
-		// Jika sudah ada, update. Jika belum, insert.
-		String check = "SELECT 1 FROM cart_items WHERE idCustomer = ? AND idProduct = ? LIMIT 1";
-		try (PreparedStatement psCheck = conn.prepareStatement(check)) {
-			psCheck.setInt(1, customerId);
-			psCheck.setInt(2, productId);
-			try (ResultSet rs = psCheck.executeQuery()) {
-				if (rs.next()) {
-					String update = "UPDATE cart_items SET count = ? WHERE idCustomer = ? AND idProduct = ?";
-					try (PreparedStatement psUpdate = conn.prepareStatement(update)) {
-						psUpdate.setInt(1, count);
-						psUpdate.setInt(2, customerId);
-						psUpdate.setInt(3, productId);
-						return psUpdate.executeUpdate() > 0;
-					}
-				} else {
-					String insert = "INSERT INTO cart_items(idCustomer, idProduct, count) VALUES(?, ?, ?)";
-					try (PreparedStatement psInsert = conn.prepareStatement(insert)) {
-						psInsert.setInt(1, customerId);
-						psInsert.setInt(2, productId);
-						psInsert.setInt(3, count);
-						return psInsert.executeUpdate() > 0;
-					}
-				}
-			}
+	
+	public static CartItem insertCartItem(String userID, String idProduct, int count) {
+		String query = "INSERT INTO cart(idUser, idProduct, count) VALUES(?, ?, ?)";
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, userID);
+			ps.setString(2, idProduct);
+			ps.setInt(3, count);
 		} catch (SQLException e) {
+			System.out.println("Failed to prepareQuery");
 			e.printStackTrace();
-			return false;
 		}
+		return new CartItem(userID, idProduct, count);
+	}
+
+	public static CartItem updateCartItem(String userID, String productId, int count) {
+		//insert.
+		String query = "UPDATE cart_items SET count = ? WHERE idCustomer = ? AND idProduct = ?";
+		
+		try {
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, count);
+			ps.setString(2, userID);
+			ps.setString(3, productId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return CartModel.updateCartItem(userID, productId, count);
 	}
 
 	public static boolean deleteCartItem(int customerId, int productId) {
@@ -71,18 +71,6 @@ public class CartModel {
 			ps.setInt(1, customerId);
 			ps.setInt(2, productId);
 			return ps.executeUpdate() > 0;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public static boolean clearCart(int customerId) {
-		String query = "DELETE FROM cart_items WHERE idCustomer = ?";
-		try (PreparedStatement ps = conn.prepareStatement(query)) {
-			ps.setInt(1, customerId);
-			ps.executeUpdate();
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
