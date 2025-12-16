@@ -11,7 +11,7 @@ public class OrderDetailsModel {
 
     private static Connection conn = DatabaseConnector.getConnection();
 
-    public static boolean createOrderDetail(String idOrder, String idProduct, int qty) {
+    public static OrderDetails createOrderDetail(String idOrder, String idProduct, int qty) {
         String query = "INSERT INTO orderdetails(idOrder, idProduct, qty) VALUES(?, ?, ?)";
 
         try {
@@ -19,11 +19,11 @@ public class OrderDetailsModel {
             ps.setString(1, idOrder);
             ps.setString(2, idProduct);
             ps.setInt(3, qty);
-            return ps.executeUpdate() > 0;
+            return new OrderDetails(idOrder, idProduct, qty);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
     
     public static OrderDetails getOrderDetail(String idOrder, String idProduct) {
