@@ -142,9 +142,41 @@ public class UserModel {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return UserModel.editProfile(userID, fullName, phone, address);
+	    return null;
 	}
 	
+	
+	public static double getCustomerBalance(int userID) {
+	    String query = "SELECT balance FROM users WHERE idUser = ?";
+
+	    try {
+	        PreparedStatement ps = conn.prepareStatement(query);
+	        ps.setInt(1, userID);
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            return rs.getDouble("balance");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return 0;
+	}
+
+	public static boolean updateBalance(int userID, double newBalance) {
+	    String query = "UPDATE users SET balance = ? WHERE idUser = ?";
+
+	    try {
+	        PreparedStatement ps = conn.prepareStatement(query);
+	        ps.setDouble(1, newBalance);
+	        ps.setInt(2, userID);
+	        return ps.executeUpdate() > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
+
 	
 	
 }

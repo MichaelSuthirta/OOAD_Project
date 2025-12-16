@@ -9,6 +9,24 @@ public class CartItem {
 		this.idProduct = idProduct;
 		this.count = count;
 	}
+	public String getIdCustomer() {
+		return idCustomer;
+	}
+	public void setIdCustomer(String idCustomer) {
+		this.idCustomer = idCustomer;
+	}
+	public String getIdProduct() {
+		return idProduct;
+	}
+	public void setIdProduct(String idProduct) {
+		this.idProduct = idProduct;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	
 	
 }
