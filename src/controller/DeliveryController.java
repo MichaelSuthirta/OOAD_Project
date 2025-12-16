@@ -8,8 +8,15 @@ import models.entity_models.User;
 public class DeliveryController {
 
     // assignCourierToOrder
-    public static Delivery assignCourierToOrder(String idOrder, String idCourier) {
+    public static Delivery assignCourierToOrder(User currentUser, String idOrder, String idCourier) {
 
+    	
+    	if (currentUser == null || 
+    	        !currentUser.getRole().equalsIgnoreCase("admin")) {
+    	        System.out.println("Only admin can assign courier");
+    	        return null;
+    	    }
+    	
         User courier = UserModel.findUserByID(Integer.parseInt(idCourier));
         if (courier == null || !courier.getRole().equalsIgnoreCase("courier")) {
             System.out.println("Courier not found");
