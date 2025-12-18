@@ -3,6 +3,9 @@ package models.entity_models;
 public class Customer extends User{
 	private double balance;
 	
+	//creates a new Customer instance.
+
+
 	public Customer(String idUser, String fullName, String email, String password, String phone, String address,
 			String gender, double balance) {
 		super(idUser, fullName, email, password, phone, address, gender, "customer");

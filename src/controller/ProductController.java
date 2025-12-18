@@ -6,6 +6,8 @@ import models.entity_models.Product;
 public class ProductController {
 	
 	
+	//Edits the stock.
+	
 	public static Product editStock(String id, String newStock) {
 		int stock;
 		

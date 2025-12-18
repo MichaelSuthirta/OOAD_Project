@@ -7,11 +7,16 @@ import models.entity_models.User;
 
 public class UserController {
 
+	//Returns user by id.
+
 	public static User getUserByID(String ID) {
 		User result = UserModel.findUserByID(Integer.parseInt(ID));
 		return result;
 	}
 	
+	// Performs the register customer operation.
+
+
 	public static Customer registerCustomer(String username, String email, String password, String confirmPass,
 			String phone, String address, String gender) {
 		
@@ -21,8 +26,12 @@ public class UserController {
 			System.out.println("Empty field(s)");
 			return null;
 		}
-		if(!email.contains("@gmail.com")) {
+		if(!email.endsWith("@gmail.com")) {
 			System.out.println("Invalid email");
+			return null;
+		}
+		if(UserModel.findIDByEmail(email) != -1) {
+			System.out.println("Email already registered");
 			return null;
 		}
 		if(password.length() < 6) {
@@ -36,10 +45,14 @@ public class UserController {
 		
 		//Check if phone is numeric
 		try {
-			Integer.parseInt(phone);
+			Long.parseLong(phone);
 		}
 		catch(Exception e) {
 			System.out.println("Phone is not numeric");
+			return null;
+		}
+		if(phone.length() < 10 || phone.length() > 13) {
+			System.out.println("Phone length invalid");
 			return null;
 		}
 		
@@ -93,36 +106,29 @@ public class UserController {
 		return UserModel.topUp(id, topUp);
 	}
 	
-	public static Customer editProfile(String userID, String fullName, String phone, String address) {
-		int id;
+	public static String editProfile(int idUser, String fullName, String email,
+            String password, String phone, String address) {
 
-		if (fullName.isBlank() || phone.isBlank() || address.isBlank()) {
-			System.out.println("Empty field(s)");
-			return null;
+		if (fullName == null || fullName.trim().isEmpty()) return "Name must be filled!";
+		if (email == null || !email.contains("@")) return "Email is invalid!";
+		if (phone == null || phone.trim().isEmpty()) return "Phone must be filled!";
+		if (address == null || address.trim().isEmpty()) return "Address must be filled!";
+
+		Customer updated = UserModel.editProfile(
+				idUser,
+				fullName.trim(),
+				email.trim(),
+				password == null ? "" : password.trim(),
+				phone.trim(),
+				address.trim()
+				);
+
+		if (updated == null) {
+			return "Failed to update profile!";
 		}
 
-		// Check phone numeric
-		try {
-			Long.parseLong(phone);
-		} catch (Exception e) {
-			System.out.println("Phone must be numeric");
-			return null;
-		}
+		return null; // null means success
+}
 
-		if (phone.length() < 10 || phone.length() > 13) {
-			System.out.println("Phone length invalid");
-			return null;
-		}
-
-		try {
-			id = Integer.parseInt(userID);
-		} catch (Exception e) {
-			System.out.println("Invalid ID");
-			return null;
-		}
-
-		return UserModel.editProfile(id, fullName, phone, address);
-	}
-	
  
 }

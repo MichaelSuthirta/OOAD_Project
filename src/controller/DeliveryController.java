@@ -1,32 +1,50 @@
 package controller;
 
 import models.data_handling.DeliveryModel;
+import models.data_handling.OrderHeaderModel;
 import models.data_handling.UserModel;
 import models.entity_models.Delivery;
 import models.entity_models.User;
 
 public class DeliveryController {
 
-    // assignCourierToOrder
-    public static Delivery assignCourierToOrder(User currentUser, String idOrder, String idCourier) {
+    //  Performs the assign courier to order operation.
+     
+
+    public static boolean assignCourierToOrder(User currentUser, String idOrder, String idCourier) {
 
     	
     	if (currentUser == null || 
     	        !currentUser.getRole().equalsIgnoreCase("admin")) {
     	        System.out.println("Only admin can assign courier");
-    	        return null;
+    	        return false;
     	    }
     	
         User courier = UserModel.findUserByID(Integer.parseInt(idCourier));
         if (courier == null || !courier.getRole().equalsIgnoreCase("courier")) {
             System.out.println("Courier not found");
-            return null;
+            return false;
         }
 
-        return DeliveryModel.createDelivery(idOrder, idCourier);
+        return DeliveryModel.assignCourierToOrder(idOrder, idCourier);
+    }
+    
+    //Performs an admin action to assign courier.
+     
+
+    public static boolean adminAssignCourier(String idOrder, String idCourier) {
+        boolean okAssign = DeliveryModel.assignCourierToOrder(idOrder, idCourier);
+        if (!okAssign) return false;
+
+        boolean okOrder = OrderHeaderModel.editOrderHeaderStatus(idOrder, "In Progress");
+        return okOrder;
     }
 
-    // editDeliveryStatus
+
+
+    //Edits the delivery status.
+     
+
     public static boolean editDeliveryStatus(
             String idOrder,
             String idCourier,
@@ -43,5 +61,20 @@ public class DeliveryController {
         }
 
         return DeliveryModel.editDeliveryStatus(idOrder, idCourier, status);
+    }
+    
+    public static boolean courierUpdateStatus(String idOrder, String idCourier, String deliveryStatus) {
+
+        // 1) update delivery
+        boolean okDelivery = DeliveryModel.editDeliveryStatus(idOrder, idCourier, deliveryStatus);
+
+        // 2) Also update the order header (this is what changes the status from Pending).
+        String orderStatus = deliveryStatus;
+        if ("In Progress".equalsIgnoreCase(deliveryStatus)) orderStatus = "PROCESSING";
+        if ("Delivered".equalsIgnoreCase(deliveryStatus)) orderStatus = "COMPLETED";
+
+        boolean okOrder = OrderHeaderModel.editOrderHeaderStatus(idOrder, orderStatus);
+
+        return okDelivery && okOrder;
     }
 }

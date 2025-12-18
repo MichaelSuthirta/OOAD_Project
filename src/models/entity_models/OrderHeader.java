@@ -7,6 +7,9 @@ public class OrderHeader {
 	private Date orderedAt;
 	private double totalAmount;
 	
+	//Creates a new OrderHeader instance.
+
+
 	public OrderHeader(String idOrder, String idCustomer, String idPromo, String status,
 			Date orderDate, double totalAmount) {
 		super();

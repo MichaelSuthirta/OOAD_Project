@@ -15,9 +15,15 @@ public class EditProductStockView {
     GridPane gp;
     Scene scene;
 
+    // Creates a new EditProductStockView instance.
+     
+
     public EditProductStockView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         gp = new GridPane();
@@ -45,8 +51,14 @@ public class EditProductStockView {
         stage.show();
     }
 
+    // Returns product box.
+     
+
     public ComboBox<String> getProductBox() { return productBox; }
     public String getStock() { return stockField.getText(); }
+    // Returns save button.
+     
+
     public Button getSaveButton() { return saveButton; }
     public Button getBackButton() { return backButton; }
 }

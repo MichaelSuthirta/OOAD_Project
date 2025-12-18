@@ -17,9 +17,15 @@ public class AddToCartView {
     GridPane gp;
     Scene scene;
 
+    // Creates a new AddToCartView instance.
+
+
     public AddToCartView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+   
 
     public void show(String productName) {
         gp = new GridPane();
@@ -49,5 +55,8 @@ public class AddToCartView {
 
     public String getQuantity() { return countField.getText(); }
     public Button getAddButton() { return addButton; }
+    // Returns back button.
+    
+
     public Button getBackButton() { return backButton; }
 }

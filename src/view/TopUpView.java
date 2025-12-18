@@ -16,9 +16,15 @@ public class TopUpView {
     GridPane gp;
     Scene scene;
 
+    // Creates a new TopUpView instance.
+     
+
     public TopUpView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         gp = new GridPane();
@@ -43,5 +49,8 @@ public class TopUpView {
 
     public String getAmount() { return amountField.getText(); }
     public Button getTopUpButton() { return topUpButton; }
+    // Returns back button.
+    
+
     public Button getBackButton() { return backButton; }
 }

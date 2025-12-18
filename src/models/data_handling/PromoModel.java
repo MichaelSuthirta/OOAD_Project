@@ -11,6 +11,8 @@ public class PromoModel {
 
 	private static Connection conn = DatabaseConnector.getConnection();
 	
+	//Returns promo.
+
 	public static Promo getPromo(String code) {
 		String query = "SELECT * FROM promo WHERE code = ?";
 		
@@ -32,7 +34,7 @@ public class PromoModel {
 			e.printStackTrace();
 		}
 		
-		return PromoModel.getPromo(code);
+		return null;
 	}
 
 }

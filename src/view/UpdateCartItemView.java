@@ -17,9 +17,15 @@ public class UpdateCartItemView {
     GridPane gp;
     Scene scene;
 
+    // Creates a new UpdateCartItemView instance.
+    
+
     public UpdateCartItemView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show(String productName, int currentQty) {
         gp = new GridPane();
@@ -50,5 +56,8 @@ public class UpdateCartItemView {
 
     public String getNewQty() { return qtyField.getText(); }
     public Button getUpdateButton() { return updateButton; }
+    //SW Returns cancel button.
+     
+
     public Button getCancelButton() { return cancelButton; }
 }

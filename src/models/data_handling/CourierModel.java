@@ -13,7 +13,8 @@ public class CourierModel {
 
     private static Connection conn = DatabaseConnector.getConnection();
 
-    // getCourier(idCourier)
+    // Returns courier by id.
+
     public static Courier getCourierByID(int idCourier) {
         String query = "SELECT * FROM users WHERE idUser = ? AND role = 'courier'";
 
@@ -42,7 +43,9 @@ public class CourierModel {
     }
 
 
-    // getAllCouriers()
+    //Returns all couriers.
+
+
     public static List<Courier> getAllCouriers() {
         List<Courier> couriers = new ArrayList<>();
         String query = "SELECT * FROM users WHERE role = 'courier'";

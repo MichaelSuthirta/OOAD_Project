@@ -15,9 +15,15 @@ public class EditDeliveryStatusView {
     GridPane gp;
     Scene scene;
 
+    // Creates a new EditDeliveryStatusView instance.
+     
+
     public EditDeliveryStatusView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         gp = new GridPane();
@@ -46,8 +52,14 @@ public class EditDeliveryStatusView {
         stage.show();
     }
 
+    // Returns order box.
+     
+
     public ComboBox<String> getOrderBox() { return orderBox; }
     public String getStatus() { return statusBox.getValue(); }
+    // Returns update button.
+     
+
     public Button getUpdateButton() { return updateButton; }
     public Button getBackButton() { return backButton; }
 }

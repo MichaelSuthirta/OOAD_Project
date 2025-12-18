@@ -5,6 +5,9 @@ import controller.UserController;
 public class User {
 	private String idUser, fullName, email, password, phone, address, gender, role;
 
+	//Creates a new User instance.
+
+
 	public User(String idUser, String fullName, String email, String password, String phone, String address,
 			String gender, String role) {
 		super();
@@ -16,6 +19,14 @@ public class User {
 		this.address = address;
 		this.gender = gender;
 		this.role = role;
+	}
+
+	public String getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(String idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getFullName() {

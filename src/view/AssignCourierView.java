@@ -15,9 +15,15 @@ public class AssignCourierView {
     GridPane gp;
     Scene scene;
 
+    // Creates a new AssignCourierView instance.
+     
+
     public AssignCourierView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         gp = new GridPane();
@@ -44,9 +50,17 @@ public class AssignCourierView {
         stage.setTitle("Assign Courier to Order");
         stage.show();
     }
+    
+    
+
+    // Returns order idbox.
+     
 
     public ComboBox<String> getOrderIDBox() { return orderIDBox; }
     public ComboBox<String> getCourierBox() { return courierBox; }
+    // Returns assign button.
+     
+
     public Button getAssignButton() { return assignButton; }
     public Button getBackButton() { return backButton; }
 }

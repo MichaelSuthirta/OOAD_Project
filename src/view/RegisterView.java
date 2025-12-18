@@ -17,9 +17,15 @@ public class RegisterView {
     Scene scene;
     
 
+    // Creates a new RegisterView instance.
+     
+
     public RegisterView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         gp = new GridPane();
@@ -75,6 +81,9 @@ public class RegisterView {
     public String getPhone() { return phoneField.getText(); }
     public String getAddress() { return addressField.getText(); }
     public String getGender() { return genderBox.getValue(); }
+
+    // Returns register button.
+     
 
     public Button getRegisterButton() {
         return registerButton;

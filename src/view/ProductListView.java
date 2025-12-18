@@ -6,9 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import models.data_handling.ProductModel;
 import models.entity_models.Product;
 
 public class ProductListView {
@@ -20,9 +22,15 @@ public class ProductListView {
     HBox hbox;
     Label title;
 
+    // Creates a new ProductListView instance.
+     
+
     public ProductListView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         bp= new BorderPane();
@@ -41,6 +49,13 @@ public class ProductListView {
         stockCol.setPrefWidth(80);
 
         productTable.getColumns().addAll(nameCol, priceCol, stockCol);
+        
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+
+        productTable.setItems(ProductModel.getAllProducts());
+
 
         addToCartButton = new Button("Add to Cart");
         backButton = new Button("Back");
@@ -57,7 +72,12 @@ public class ProductListView {
         stage.show();
     }
 
+    // Returns product table.
+     
+
     public TableView<Product> getProductTable() { return productTable; }
     public Button getAddToCartButton() { return addToCartButton; }
+    // Returns back button.
+     
     public Button getBackButton() { return backButton; }
 }

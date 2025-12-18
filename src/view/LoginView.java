@@ -21,9 +21,15 @@ public class LoginView {
     Label emailLabel, passLabel;
     Hyperlink signupLink;
 
+    // Creates a new LoginView instance.
+     
+
     public LoginView(Stage stage) {
         this.stage = stage;
     }
+
+    // Displays the view.
+     
 
     public void show() {
         gp = new GridPane();
@@ -63,13 +69,22 @@ public class LoginView {
     }
 
     
+    // Returns email.
+     
+
     public String getEmail() {
         return emailField.getText();
     }
 
+    //Returns password.
+     
+
     public String getPassword() {
         return passwordField.getText();
     }
+
+    // Returns login button.
+     
 
     public Button getLoginButton() {
         return loginButton;

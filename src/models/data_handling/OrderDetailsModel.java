@@ -11,6 +11,9 @@ public class OrderDetailsModel {
 
     private static Connection conn = DatabaseConnector.getConnection();
 
+    // Creates an order detail.
+
+
     public static OrderDetails createOrderDetail(String idOrder, String idProduct, int qty) {
         String query = "INSERT INTO orderdetails(idOrder, idProduct, qty) VALUES(?, ?, ?)";
 
@@ -19,6 +22,7 @@ public class OrderDetailsModel {
             ps.setString(1, idOrder);
             ps.setString(2, idProduct);
             ps.setInt(3, qty);
+			ps.executeUpdate();
             return new OrderDetails(idOrder, idProduct, qty);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -26,6 +30,9 @@ public class OrderDetailsModel {
         return null;
     }
     
+    //Returns order detail.
+
+
     public static OrderDetails getOrderDetail(String idOrder, String idProduct) {
         String query = "SELECT * FROM orderdetails WHERE idOrder = ? AND idProduct = ?";
 
@@ -48,7 +55,5 @@ public class OrderDetailsModel {
         return null;
     }
     
-    public static OrderDetails saveOrderDetail() {
-		return null;
-    }
+
 }
